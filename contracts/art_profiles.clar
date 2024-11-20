@@ -104,3 +104,39 @@
         )
     )
 )
+
+;; Read-only function: Retrieve an artist's full profile
+;; Allows anyone to retrieve the complete profile of a specified artist.
+(define-read-only (get-profile (user principal))
+    (match (map-get? profiles user)
+        profile (ok profile)
+        ERR-NOT-FOUND
+    )
+)
+
+;; Read-only function: Retrieve the art style of a specific artist
+;; Provides the art style of the given artist.
+(define-read-only (get-art-style (user principal))
+    (match (map-get? profiles user)
+        profile (ok (get art_style profile))
+        ERR-NOT-FOUND
+    )
+)
+
+;; Read-only function: Retrieve the exhibitions of a specific artist
+;; Returns the list of exhibitions an artist has participated in.
+(define-read-only (get-exhibitions (user principal))
+    (match (map-get? profiles user)
+        profile (ok (get exhibitions profile))
+        ERR-NOT-FOUND
+    )
+)
+
+;; Read-only function: Retrieve the portfolio links of a specific artist
+;; Returns the portfolio links of the given artist.
+(define-read-only (get-portfolio-links (user principal))
+    (match (map-get? profiles user)
+        profile (ok (get portfolio_links profile))
+        ERR-NOT-FOUND
+    )
+)
